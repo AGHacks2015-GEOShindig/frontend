@@ -1,0 +1,36 @@
+
+<form class="form-horizontal" ng-submit="search()">
+
+  <div class="form-group">
+    <div class="col-sm-5">
+      <input type="text" ng-model="selectedCity" uib-typeahead="city for city in cities | filter:$viewValue | limitTo:3" class="form-control">
+    </div>
+    <div class="col-sm-5">
+      <div class="input-group">
+        <input type="number" ng-model="maxDistance" class="form-control" id="maxDistance" placeholder="Maximum distance">
+        <span class="input-group-addon">KM</span>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <button type="submit" class="btn btn-default">Search</button>
+    </div>
+    </div>
+</form>
+<h2>{{status}}</h2>
+<table class="table table-striped" ng-if="searchHasBeenTrigered">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>URL</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr ng-repeat="friend in friends | filter:q as results">
+    <td>{{friend._source.name}}</td>
+    <td>{{friend._source.start_time | date:'yyyy-MM-dd'}}</td>
+    <td><a target="_blank" href="https://www.facebook.com/events/{{friend._source.id}}">link</a></td>
+  </tr>
+  </tbody>
+</table>
